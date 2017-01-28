@@ -504,12 +504,12 @@ function updatePositions() {
   var items = document.querySelectorAll('.mover');
   //This is a problematic for loop because of its numerous calculations
   //put them outside
-  var i = 0; while (i < 200){
-    items = document.createElement('li') 
+  var i = 0; while (i < items.length){
     var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
 
     console.log("ah hell " + phase);
+    i += 1
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -529,20 +529,16 @@ window.addEventListener('scroll', updatePositions);
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
-  var el
-  var framgment = document.createDocumentFragment()
   var i = 0; while(i < 200){
-      el = document.createElement('img')
-      el.className = 'mover'
-      el.src = "images/pizza.png"
-      el.style.height = "100px"
-      el.style.width = "73.333px"
-      el.basicLeft = (i % cols) * s
-      el.style.top = (Math.floor(i/cols) * s) + 'px'
- 
-      fragment.appendChild(el)
+      var elem = document.createElement('img')
+      elem.className = 'mover'
+      elem.src = "images/pizza.png"
+      elem.style.height = "100px"
+      elem.style.width = "73.333px"
+      elem.basicLeft = (i % cols) * s
+      elem.style.top = (Math.floor(i/cols) * s) + 'px'
+      document.querySelector("#movingPizzas1").appendChild(elem);
       i += 1
     }
-  document.querySelector("#movingPizzas1").appendChild(fragment);
   updatePositions();
 });
